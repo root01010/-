@@ -1,0 +1,25 @@
+{
+  "manifest_version": 3,
+  "name": "ROSH Monitor",
+  "version": "1.12",
+  "description": "Локальный Монитор параметров для гидродинамической установки по типу ROSH",
+  "icons": {
+    "16": "images/favicon_16.png",
+	"32": "images/favicon_32.png",
+	"128": "images/logo_128.png"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "Открыть ROSH Local",
+	"default_icon": {
+	   "16": "images/favicon_16.png",
+       "32": "images/favicon_32.png"
+         }
+    },
+  "permissions": [
+    "activeTab",
+    "tabs"
+   ]
+}

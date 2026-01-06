@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>РОШ Установка</title>
+  <link rel="stylesheet" type="text/css" href="style/main.css" id="main-style" /> 
+  
+  <script src='scrypt/core/jQuery_1.12.4.js'></script> 
+  <script src='scrypt/core/script.min.js'></script>
+  <script src='scrypt/core/math.js'></script>
+  
+  <script src='scrypt/config.js'></script>
+  <script src='scrypt/functions.js'></script>
+  <script src='scrypt/controls.js'></script>
+  <script src='scrypt/interface.js'></script>
+  <script src='scrypt/head.js'></script>
+</head>
+<body id="body">
+
+ <div class="workArea">
+   <div class="left">
+  
+    <div class="input-data">
+	    <h2>Исходные параметры установки</h2>
+		
+		   <div id="block-configName" class="input-form__block">
+			  <div class="input-form__field">
+                  <input type="text" class="input-field" id="configName-input" name="configName" placeholder="Название конфигурации" value="Config_1">
+				  <label for="configName-input" class="input-label">Название конфигурации</label>
+				  <span class="before configName-before">&#xf15b;</span>
+				  <span class="after save-control saved" id="saveConfig">&#xf0c7;</span>
+              </div>			  
+	       </div>
+	     
+   		   <div id="block-stepChain" class="input-form__block">
+			  <div class="input-form__field">
+                  <input type="number" class="input-field" id="stepChain-input" name="stepChain" placeholder="Шаг цепи, мм" value="19.05" step="0.05" min="10" max="100">
+				  <label for="stepChain-input" class="input-label">Шаг цепи в миллиметрах</label>
+				  <span class="before step-before">&#xf0c1;</span>
+              </div>			  
+	       </div>
+		  
+		  <div id="block-betweenFloats" class="input-form__block">
+			  <div class="input-form__field">
+                  <input type="number" class="input-field" id="betweenFloats-input" name="betweenFloats" placeholder="Звеньев между поплавками" value="18" step="1" min="5" max="50" >
+				  <label for="betweenFloats-input" class="input-label">Звеньев между поплавками</label>
+				  <span class="before betweenFloats-before">&#xf141;</span>
+              </div>			  
+	       </div>
+                		
+          <div id="block-teethNumber" class="input-form__block">
+		      <div class="input-form__field">
+                 <input type="number" class="input-field" id="teethNumber-input" name="teethNumber" placeholder="Зубьев на звезде" value="54" step="1" min="10" max="100" >
+				 <label for="teethNumber-input" class="input-label">Кол-во Зубьев на звезде</label>
+				 <span class="before teethNumber-before">&#xf185;</span>
+              </div>
+		  </div>
+		  
+		  <div id="block-floatsNumber" class="input-form__block">
+		      <div class="input-form__field">
+                  <input type="number" class="input-field" id="floatsNumber-input" name="floatsNumber" placeholder="Количество поплавков" value="13" step="1" min="4" max="100">
+				  <label for="floatsNumber-input" class="input-label">Количество поплавков</label>
+				  <span class="before floatsNumber-before">&#xf1b3;</span>
+            </div>
+		  </div>
+		  
+		  <div id="block-floatDiameter" class="input-form__block">
+		      <div class="input-form__field">
+                  <input type="number" class="input-field" id="floatDiameter-input" name="floatDiameter" placeholder="Диаметр поплавка, мм" value="225" step="5" min="100" max="600">
+				  <label for="floatDiameter-input" class="input-label">Диаметр поплавка в мм</label>
+				  <span class="before floatDiameter-before">&#xf140;</span>
+            </div>
+		  </div>
+		  
+		  <div id="block-floatVolume" class="input-form__block">
+		      <div class="input-form__field">
+                  <input type="number" class="input-field" id="floatVolume-input" name="floatVolume" placeholder="Объём поплавка, л" value="23" step="0.5" min="5" max="100">
+				  <label for="floatVolume-input" class="input-label">Объём поплавка в литрах</label>
+				  <span class="before floatVolume-before">&#xf0c3;</span>
+            </div>
+		  </div>
+	
+	   </div>
+	   
+	   <div class="blowing-data" id="leftSensorBlock">
+	     <h2>Параметры задува</h2>
+		 <p>Объём воздуха - <span id="fullAirVolume">0</span> литров</p>
+		 <p>Потребление - <span id="fullEnergyIn">0</span> Вт*часов</p>
+	   </div>
+	   
+    </div>
+  
+  <div class="rosh-container center">
+    <div class="track" id="track"></div>
+  </div>
+  
+  <div class="right">
+    <div class="output-data align-right">
+        <h2>Расчётные параметры установки</h2>
+		 <p>Между осями - <span id="chainStraightLength" class="outputParameter">0</span> мм</p>
+		 <p>Диаметр звёзд - <span id="starDiameter" class="outputParameter">0</span> мм</p>
+		 <p>Длина цепи - <span id="chainTotalLength" class="outputParameter">0</span> мм</p>
+		 <p>Высота общая - <span id="tankHeight" class="outputParameter">0</span> мм</p>
+		 <p>Ширина общая - <span id="tankWidth" class="outputParameter">0</span> мм</p>
+    </div>
+	
+	<div class="output-data align-right" id="rightSensorBlock">
+        <h2>Динамические параметры установки</h2>
+		 <p>Скорость поплавков - <span id="floatSpeed" class="outputParameter">0</span> мм/сек</p>
+		 <p>Обороты генератора - <span id="generatorRotation" class="outputParameter">0</span> об/мин</p>
+		 <p>Выработка - <span id="fullEnergyOut" class="outputParameter">0</span> Вт*часов</p>
+    </div>
+	
+	<div class="output-data align-right">
+        <h2>Обработка потоковых данных</h2>
+		<div class="controllerMode">
+		 <h3 tabindex="1">Режим: <span id="controllerMode">Визуализация</span></h3>
+		  <ul id="controllerChangeMode">
+		      <li data-mode="visualization" class="controllerChangeMode">Визуализация</li>
+		      <li data-mode="synchronization" class="controllerChangeMode active">Синхронизация</li>
+			  <li data-mode="statistic" class="controllerChangeMode active">Статистика</li>
+		 </ul></div>
+		 <p><span id="controllerStatus" class="stop">СТОП</span></p>
+    </div>
+	
+    </div>
+   </div>
+   
+  <div id="resizableArea" class="statisticArea">
+    <div id="resizableAreaLine" class="vertical-line"></div>
+  
+    <div class="controls">
+      <div class="data-box">
+        <div id="timer">00:00:00</div>
+      </div>
+	
+	  <div class="data-box" id="controlButtons">
+       <div id="buttonStop" class="controlButtons" title="Остановить визуализацию">&#xf04d;</div>
+	   <div id="buttonPause" class="controlButtons" title="Поставить визуализацию на Паузу">&#xf04c;</div>
+	   <div id="buttonPlay" class="controlButtons active" title="Запуск визуализации">&#xf144;</div>
+	   <div id="buttonX2" class="controlButtons" title="Ускорить проигрывание">&#xf04e;</div>
+	   <div id="buttonRecord" class="controlButtons" title="Запись визуализации">&#xf192;</div>
+      </div>
+	 </div>
+  
+    <div class="settings">
+     <div class="data-box" id="menuButtons">
+	   <div id="buttonConnectStatus" class="controlButtons" title="Соединение с контролелром">&#xf213;</div>
+       <div id="buttonSensors" class="controlButtons" title="Датчики">&#xf0e4;</div>
+	   <div id="buttonStatistic" class="controlButtons" title="Статистика">&#xf080;</div>
+	   <div id="buttonImport" class="controlButtons" title="Импорт файла">&#xf0ee;</div>
+	   <div id="buttonExport" class="controlButtons" title="Экспорт файла">&#xf019;</div>
+	   <div id="buttonSettings" class="controlButtons" title="Настройки">&#xf013;</div>
+      </div>
+	 </div>
+	 
+    </div>
+  <script src='scrypt/visual.rosh.js'></script>
+</body>
+</html>

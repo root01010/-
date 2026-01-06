@@ -1,0 +1,599 @@
+ <article>  
+ 
+  <div id="menu" class="disableUserSelect">
+    <h1>Настройки</h1>
+	<ul>
+	 <li id="Item-1">Базовые настройки</li>
+	 <li id="Item-2" class="otstup">Настройки WebSocket</li>
+	 
+	 <li id="Item-3">Расчётные переменные</li>
+	 <li id="Item-4">Интерфейсные Датчики</li>
+	 <li id="Item-5" class="otstup">Переменные Графиков</li>
+	  
+	 <li id="Item-6">Настройки аккаунта</li> 
+	 <li id="Item-7" class="otstup">Синхронизация</li>
+	 
+     <li id="Item-8" >Вернуться</li>
+	</ul>
+   <div id="move" title="Переместите Окно настроек для наглядности применённых изменений"></div>
+ </div>
+ 
+   <!--  ПЕРВАЯ ВКЛАДКА "БАЗОВЫЕ НАСТРОЙКИ"	-->
+ 
+  <div id="Item-Content-1" class="content wrapper">
+   <div class="scroller">
+    <div class="container">
+	
+   <!-- Пример хранения конфигурации по аналогии с классической БД Mysql
+	
+	   table   chapter   section    name     value    
+	
+	 settings.controller.rotation.isEnable   true
+	 settings.controller.rotation.value        T2
+	 settings.controller.rotation.reduction    25	 -->
+	
+	 <form id="settingsForm" class="settings-form"> 
+	 <h2>Базовая визуализация Потоковых данных</h2>
+	 
+	 <p>Все поля предназначены для ввода названий соответствующих датчиков из потоковых данных NodeMCU, например: P1 или R2 или W3.
+         Но также допускаются и арифметические выражения, например: (R2 * 2) - P1</p>
+	 
+	<!--  Rotation of chains with floats
+	
+	      settings.controller.rotation.isEnable 
+	      settings.controller.rotation.value   
+	      settings.controller.rotation.reduction  -->
+	 
+	 <div id="change_controller_rotation" class="checkbox controller_rotation">
+	     <input type="hidden" name="controller_rotation_isEnable" value="off">
+         <input id="controller_rotation_isEnable" type="checkbox" name="controller_rotation_isEnable">
+           <label for="controller_rotation_isEnable">Вращение цепей с поплавками</label>
+		   
+		   <div id="change_rotation_value" class="login-form__block child_control">
+			  <div class="login-form__field">
+                  <input type="text" class="login-input" id="controller_rotation_value" name="controller_rotation_value" placeholder="Частота вращения" required disabled>
+				  <span class="before">&#xf1c0;</span>
+              </div>			  
+	       </div>
+		   
+		  <div class="multiplication child_control">X</div>
+		  
+		  <div id="change_rotation_reduction" class="login-form__block child_control">
+			  <div class="login-form__field">
+                  <input type="text" class="login-input" id="controller_rotation_reduction" name="controller_rotation_reduction" placeholder="Редукция" required disabled>
+				  <span class="before">&#xf1c0;</span>
+              </div>			  
+	       </div>
+	 </div>
+	 
+	<!--  Top Dead Point position
+	
+	      settings.controller.tdp.isEnable 
+	      settings.controller.tdp.value  -->
+	 
+	 <div id="change_controller_tdp" class="checkbox controller_tdp">
+	     <input type="hidden" name="controller_tdp_isEnable" value="off">
+         <input id="controller_tdp_isEnable" type="checkbox" name="controller_tdp_isEnable">
+           <label for="controller_tdp_isEnable">Синхронизация положения 1-го поплавка в ВМТ</label>
+		   
+		   <div id="change_tdp_value" class="login-form__block child_control">
+			  <div class="login-form__field">
+                  <input type="text" class="login-input" id="controller_tdp_value" name="controller_tdp_value" placeholder="Датчик положения" required disabled>
+				  <span class="before">&#xf1c0;</span>
+              </div>			  
+	       </div>		   
+	 </div>
+	 
+	 <h2>Настройка блока "Параметры задува"</h2>
+	 
+	<!--  Compressor parameters
+	
+	      settings.controller.compressor.isEnable 
+	      settings.controller.compressor.air
+          settings.controller.compressor.energy	 -->
+	 
+	 <div id="change_controller_compressor" class="checkbox controller_compressor">
+	     <input type="hidden" name="controller_compressor_isEnable" value="off">
+         <input id="controller_compressor_isEnable" type="checkbox" name="controller_compressor_isEnable">
+           <label for="controller_compressor_isEnable">Отображение объёма воздуха в каждом поплавке</label>
+		   
+		   <div id="change_compressor_air" class="login-form__block child_control">
+			  <div class="login-form__field">
+                  <input type="text" class="login-input" id="controller_compressor_air" name="controller_compressor_air" placeholder="Расход воздуха, Л" required disabled>
+				  <span class="before">&#xf1c0;</span>
+              </div>			  
+	       </div>	
+		   
+	   <h3>Потребление компрессора в Вт*часах</h3>
+	   
+	     <div id="change_compressor_energy" class="login-form__block">
+			  <div class="login-form__field">
+                  <input type="text" class="login-input" id="controller_compressor_energy" name="controller_compressor_energy" placeholder="Расход энергии, Вт">
+				  <span class="before">&#xf1c0;</span>
+              </div>			  
+	       </div>	
+
+	 </div>
+		   
+	 <h2>Настройка блока "Динамические параметры"</h2>
+	 
+	<!--  Generator parameters
+	
+	      settings.controller.generator.rotation
+          settings.controller.generator.energy	 -->
+	 
+	  <div id="change_controller_generator" class="checkbox controller_generator">
+	   <h3>Обороты генератора</h3>
+	   
+	     <div id="change_generator_rotation" class="login-form__block">
+			  <div class="login-form__field">
+                  <input type="text" class="login-input" id="controller_generator_rotation" name="controller_generator_rotation" placeholder="Частота вращения">
+				  <span class="before">&#xf1c0;</span>
+              </div>			  
+	       </div>
+	 
+	   <h3>Выработка генератора в Вт*часах</h3>
+	   
+	     <div id="change_generator_energy" class="login-form__block">
+			  <div class="login-form__field">
+                  <input type="text" class="login-input" id="controller_generator_energy" name="controller_generator_energy" placeholder="Генерация, Вт">
+				  <span class="before">&#xf1c0;</span>
+              </div>			  
+	       </div>
+	  </div>
+	 
+	 <h2>Временны́е параметры Потоковых данных</h2>
+	 
+	<!--  Timing parameters
+	
+	      settings.controller.timing.dataFrequencyInterval
+		  settings.controller.timing.dataReceiptPeriod
+          settings.controller.timing.visualizationDelay	 -->
+	 
+	 <table class="details">
+	    <tr id="change_pn_brightness">
+		    <td class="title" colspan="3">Частота обработки данных в NodeMCU, раз в сек</td>
+	    </tr><tr>
+			<td class="num">2</td>
+		    <td class="valueContent">
+			  <input type="range" min="2" max="10" value="5" step="1" id="controller_timing_dataFrequencyInterval" name="controller_timing_dataFrequencyInterval" title="5">
+			 </td>
+			<td class="num">10</td>
+		</tr>
+        <tr id="change_pn_brightness">
+		    <td class="title" colspan="3">Периодичность поступления данных с NodeMCU, сек</td>
+		</tr><tr>
+			<td class="num">0.5</td>
+		    <td class="valueContent">
+			  <input type="range" min="500" max="10000" value="3000" step="500" id="controller_timing_dataReceiptPeriod" name="controller_timing_dataReceiptPeriod" title="3">
+			 </td>
+			<td class="num">10</td>
+		</tr>
+		<tr id="change_bk_radius">
+		    <td class="title" colspan="3">Задержка визуализации от действительности, сек</td>
+		</tr><tr>
+			<td class="num">0.5</td>
+		    <td class="valueContent">
+			  <input type="range" min="500" max="60000" value="5000" step="500" id="controller_timing_visualizationDelay" name="controller_timing_visualizationDelay" title="5">
+			 </td>
+			<td class="num">60</td>
+		</tr>
+      </table>
+	  
+	     <div id="settings-send-data">
+		     <div class="login-form__field">
+			   <button type="submit" class="submit_button">Сохранить</button>
+            </div>
+		  </div>
+	  
+	 </form>
+
+	  <div class="clear"></div>
+    </div>
+	
+   </div></div>
+   
+     <!--  ВТОРАЯ ВКЛАДКА "НАСТРОЙКИ WEBSOCKET"	-->
+ 
+ <div id="Item-Content-2" class="content wrapper"> 
+  <div class="scroller">
+   <div class="container">
+   
+     <h2>Настройка соединения с контроллером через WebSocket</h2>
+	  
+	 <form id="websocketForm" class="websocket-form">  
+	  <div id="change_personal_data_content">  
+		
+   		   <div id="change_websocket_ip" class="login-form__block">
+			  <div class="login-form__field">
+                  <input type="text" class="login-input" id="websocket_ip" name="websocket_ip" placeholder="WebSocket IP" required>
+				  <label for="websocket_ip" class="login-label">IP-Адрес контроллера</label>
+				  <span class="before ip-before">&#xf0ac;</span>
+              </div>			  
+	       </div>
+		  
+          <div id="login-block-send-personal-data">
+		     <div class="login-form__field">
+			   <button id="websocket_button" type="submit" class="submit_button">Подключить</button>
+            </div>
+		  </div>
+		  
+	  </div>
+    </form>
+	
+	<div id="statusBarContainer">
+      <div id="statusBar"></div>
+	  <div id="statusTime">0</div>
+    </div>
+	
+	<h2>Лог статуса соединения с WebSocket</h2>
+
+    <div id="websocket_log"></div>
+   
+         </div>
+     </div>
+  </div> 
+  
+    <!--  ТРЕТЬЯ ВКЛАДКА "НАСТРОЙКИ ПОЛЬЗОВАТЕЛЬСКИХ ПЕРЕМЕННЫХ"	-->
+ 
+  <div id="Item-Content-3" class="content wrapper">
+   <div class="scroller">
+    <div class="container">
+		
+	 <h2>Настройка пользовательских переменных</h2>
+	 
+	 <p>Пользовательские переменные могут быть как константами, так и выражениями. Название переменной должно быть из двух латинских символов. </p>
+	 <p>Первый символ - заглавная буква от A до Z, Второй символ - цифра от 0 до 9 или маленькая буква от a до z. Например: B1, Pa, Wt, Z2 ...  </p>
+	 <p>Существующие константы: <ul>
+	     <li>Pi - 3.141592653589793</li>
+	   </ul></p>
+	 
+	 <form id="variableForm" class="variable-form">  
+	 
+      <input type="hidden" id="variable_UID" name="variable_UID" value="0"> <!-- ID Датчика -->
+	  <input type="hidden" id="variable_order" name="variable_order" value="0">  <!-- Сортировка датчика, для отображения в списке датчиков -->
+	  
+	  <div id="change_personal_data_content">  
+		   
+		<div id="change_variable_title" class="login-form__block">
+			  <div class="login-form__field">
+                  <input type="text" class="login-input" id="variable_title" name="variable_title" placeholder="Читабельное название" required>
+				  <label for="variable_name" class="login-label">Название переменной</label>
+				  <span class="before name-before">&#xf0e4;</span>
+              </div>			  
+	       </div>
+		  
+		<div id="change_variable_source" class="login-form__block">
+			  <div class="login-form__field">
+                  <input type="text" class="login-input" id="variable_source" name="variable_source" placeholder="Источник A1, M1 * N2 ..." required>
+				  <label for="variable_source" class="login-label">Источник данных</label>
+				  <span class="before source-before">&#xf1c0;</span>
+              </div>			  
+	       </div>
+		   
+		<div id="change_variable_name" class="login-form__block">
+			  <div class="login-form__field">
+                  <input type="text" class="login-input" id="variable_name" name="variable_name" pattern="[A-Z][0-9a-z]" maxlength="2" placeholder="Символьное Имя" required>
+				  <label for="variable_name" class="login-label">Символьное Имя</label>
+				  <span class="before name-before">&#xf121;</span>
+              </div>			  
+	       </div>
+		   
+	   <div style="width: 100%;"></div>
+		   
+		   
+	   <div id="change_variable_description" class="login-form__block">
+			  <div class="login-form__field">
+                  <textarea rows="3" cols="51" class="login-input styler" id="variable_description" name="variable_description" placeholder="Описание ..."></textarea>
+				  <label for="variable_description" class="login-label styler">Описание / Комментарии </label>
+				  <span class="before source-before">&#xf02d;</span>
+              </div>			  
+	       </div>
+		   
+	   <table class="settings" style="margin: 10px auto;"></table>
+	  
+          <div id="login-block-send-personal-data">
+		     <div class="login-form__field">
+			   <button type="submit" class="submit_button">Сохранить</button>
+            </div>
+		  </div>
+		  
+	  </div>
+    </form>
+
+      <div id="variableList"></div>
+	  <div class="clear"></div>
+    </div>
+	
+   </div></div>
+ 
+  <!--  ЧЕТВЁРТАЯ ВКЛАДКА "НАСТРОЙКИ ДАТЧИКОВ"	-->
+ 
+  <div id="Item-Content-4" class="content wrapper">
+   <div class="scroller">
+    <div class="container">
+		
+	 <h2>Настройка отображения датчиков</h2>
+	 
+	 <form id="sensorForm" class="sensor-form">  
+	 
+      <input type="hidden" id="sensor_UID" name="sensor_UID" value="0"> <!-- ID Датчика -->
+	  <input type="hidden" id="sensor_elUid" name="sensor_elUid" value="leftSensorBlock"> <!-- ID Блока к которому будет привязан датчик -->
+	  <input type="hidden" id="sensor_top" name="sensor_top" value="60px">  <!-- Вертикальное смещение датчика, для установки через DragAndDrop -->
+	  <input type="hidden" id="sensor_order" name="sensor_order" value="0">  <!-- Сортировка датчика, для отображения в списке датчиков -->
+	  
+	  <div id="change_personal_data_content">  
+		
+   		   <div id="change_sensor_name" class="login-form__block">
+			  <div class="login-form__field">
+                  <input type="text" class="login-input" id="sensor_name" name="sensor_name" placeholder="Название" required>
+				  <label for="sensor_name" class="login-label">Название датчика</label>
+				  <span class="before name-before">&#xf0e4;</span>
+              </div>			  
+	       </div>
+		  
+		  <div id="change_sensor_source" class="login-form__block">
+			  <div class="login-form__field">
+                  <input type="text" class="login-input" id="sensor_source" name="sensor_source" placeholder="Источник T1, U1 * I2 ..." required>
+				  <label for="sensor_source" class="login-label">Источник данных</label>
+				  <span class="before source-before">&#xf1c0;</span>
+              </div>			  
+	       </div>
+		   
+		   <div id="change_sensor_description" class="login-form__block">
+			  <div class="login-form__field">
+                  <textarea rows="3" cols="51" class="login-input styler" id="sensor_description" name="sensor_description" placeholder="Описание ..."></textarea>
+				  <label for="sensor_description" class="login-label styler">Описание / Комментарии </label>
+				  <span class="before source-before">&#xf02d;</span>
+              </div>			  
+	       </div>
+	  
+	   <table class="settings"> 
+	  
+        <tr id="change_sensor_location">
+		   <td class="title">Место отображения</td>
+		    <td class="valueContent">
+			  <div class="select">
+			    <select id="sensor_location" name="sensor_location">
+			    <option value="rightSensor"> Слева </option>
+				<option value="leftSensor"> Справа </option>          
+               </select>
+			  </div>
+		 </td></tr>
+		 
+		 <tr id="change_sensor_format">
+		   <td class="title">Формат отображения</td>
+		    <td class="valueContent">
+			  <div class="select">
+			    <select id="sensor_format" name="sensor_format">
+				<option value="no_divide"> Целое число </option> 
+				<option value="divide_10"> Делить на 10 </option> 
+			    <option value="divide_100"> Делить на 100 </option>
+				<option value="on_off"> Статус Вкл./Выкл. </option>          
+               </select>
+			  </div>
+		 </td></tr>
+		 
+		 <tr id="change_sensor_unit">
+		   <td class="title">Единица измерения</td>
+		    <td class="valueContent">
+			  <div class="select">
+			    <select id="sensor_unit" name="sensor_unit">
+				<option value=""> Пустое значение </option>
+				<option value="Bar"> Давление (Bar) </option>
+				<option value="mBar"> Давление (mBar) </option>
+			    <option value="N*m"> Момент (N*m) </option>
+				<option value="W"> Мощность (W) </option>
+				<option value="V"> Напряжение (V) </option>
+				<option value="mV"> Напряжение (mV) </option>
+				<option value="L"> Объём (L) </option>
+				<option value="Wh"> Работа (Wh) </option>     
+                <option value="A"> Ток (A) </option>	
+                <option value="°С"> Температура (°С) </option> 	
+                <option value="%"> Проценты (%) </option>				
+               </select>
+			  </div>
+		 </td></tr>
+			 
+	   </table>
+	  
+	  
+          <div id="login-block-send-personal-data">
+		     <div class="login-form__field">
+			   <button type="submit" class="submit_button">Сохранить</button>
+            </div>
+		  </div>
+		  
+	  </div>
+    </form>
+
+      <div id="sensorList"></div>
+	  <div class="clear"></div>
+    </div>
+	
+   </div></div>
+   
+      <!--  ПЯТАЯ ВКЛАДКА "ПЕРЕМЕННЫЕ ГРАФИКОВ"	-->
+ 
+  <div id="Item-Content-5" class="content wrapper">
+   <div class="scroller">
+    <div class="container">
+		
+	 <h2>Настройка переменных для отображения на графиках</h2>
+	 
+	 <p>Список переменых с их текстовым описанием, разрядностью и ед. измерения для отображения на графиках. Допускаюся математические выражения вида "W1 / (P5 + 1)"</p>
+	 
+	 
+	 <form id="variableForm" class="sensor-form"> 
+	 
+	    </form>
+
+	  <div class="clear"></div>
+    </div>
+	
+   </div></div>
+ 
+ 		   
+  <!--  ШЕСТАЯ ВКЛАДКА "НАСТРОЙКИ АККАУНТА"	-->
+ 
+   <div id="Item-Content-6" class="content wrapper">	
+	<div class="scroller">
+	 <div class="container">
+		  
+	   <h2 id="change_personal_data">Изменение Персональных Данных</h2>
+	   
+		<div id="change_personal_data_content">  
+		
+   		   <div id="login-block-name" class="login-form__block">
+			  <div class="login-form__field">
+                  <input type="text" class="login-input" id="name-input" name="first_name" placeholder="Ваше Имя" value="" required>
+				  <label for="name-input" class="login-label">Отображаемое имя</label>
+				  <span class="before name-before">&#xf007;</span>
+              </div>			  
+	       </div>
+		  
+		  <div id="login-block-email" class="login-form__block">
+			  <div class="login-form__field">
+                  <input type="email" class="login-input" id="email-input" name="email" placeholder="Email" value="" disabled="disabled">
+				  <label for="email-input" class="login-label">Email</label>
+				  <span class="before email-before">&#xf003;</span>
+				  <span class="after data-control" title="Сбросить адрес eMail" onClick="Interface.Settings('Save_Account', 'change_email');">&#xf127;</span>
+				  <input type="hidden" name="change_email" value="on">
+              </div>			  
+	       </div>
+                		
+          <div id="login-block-password" class="login-form__block">
+		      <div class="login-form__field">
+                 <input type="password" class="login-input" id="password" name="password" placeholder="Новый пароль" autocomplete="off"  >
+				 <label for="password" class="login-label">Пароль</label>
+				 <span class="before password-before">&#xf023;</span>
+				 <span class="after password-control">&#xf06e;</span>
+              </div>
+		  </div>
+		  
+		  <div id="login-block-repeat-password" class="login-form__block">
+		      <div class="login-form__field">
+                  <input type="password" class="login-input" id="repeat-password" name="repeat-password" placeholder="Подтверждение пароля" autocomplete="off"  >
+				  <label for="repeat-password" class="login-label">Повтор пароля</label>
+				  <span class="before password-before">&#xf01e;</span>
+				  <span class="after password-control">&#xf06e;</span>
+            </div>
+		  </div>
+		  
+		  <div id="login-block-send-personal-data">
+		     <div class="login-form__field">
+		       <div class="submit_button" onClick="Interface.Settings('Save_Account');">Применить</div>
+            </div>
+		  </div>
+	
+	</div>		 
+		
+       <h2 id="social_network_linking" >Добавление/Удаление аккаунтов Соц. сетей</h2>
+	    <div id="social_network_linking_content">
+		  <p>Выберите социальную сеть или провайдера, которую вы бы хотели привязать или отвязать от вашего аккаунта в сервисе:</p>
+			<div class="socialProviders"><div class="socialProvider"><a href="javascript:;" target="_top" title="Отвязать аккаунт  Vkontakte" onclick="Interface.RemoveSocService('vkontakte', 'Отвязать аккаунт Vkontakte?');" class="loginvia vkontakte" >vkontakte</a></div>
+<div class="socialProvider"><a href="javascript:;" target="_top" title="Отвязать аккаунт  Facebook" onclick="Interface.RemoveSocService('facebook', 'Отвязать аккаунт Facebook?');" class="loginvia facebook" >facebook</a></div>
+<div class="socialProvider"><a href="javascript:;" target="_top" title="Отвязать аккаунт  Google" onclick="Interface.RemoveSocService('google', 'Отвязать аккаунт Google?');" class="loginvia google" >google</a></div>
+<div class="socialProvider"><a href="/welcome.php?provider=yandex&returnUrl=%2F%3FsettingsPage%3D5" target="_top" title="Привязать аккаунт Yandex" class="loginvia yandex loginvia_grey" >yandex</a></div>
+<div class="socialProvider"><a href="javascript:;" target="_top" title="Отвязать аккаунт  Odnoklassniki" onclick="Interface.RemoveSocService('odnoklassniki', 'Отвязать аккаунт Odnoklassniki?');" class="loginvia odnoklassniki" >odnoklassniki</a></div>
+<div class="socialProvider"><a href="/welcome.php?provider=twitter&returnUrl=%2F%3FsettingsPage%3D5" target="_top" title="Привязать аккаунт Twitter" class="loginvia twitter loginvia_grey" >twitter</a></div>
+</div>
+		 </div>
+			
+	   <h2 id="reset_local_settings">Сброс Локальных настроек <div>Требуется подтверждение по E-mail / телефону</div></h2>
+	    <div id="reset_local_settings_content">
+		  <p>Будут сброшены все локальные данные сервиса - закладки, настройки, пароли доступа к папкам, файлы Cookies.</p>
+		  <p>Главное назначение - сброс паролей. После сброса вы сможете восстановить закладки с сервера.</p>
+		 <div id="reset_local_settings_button" class="submit_button" onClick="Interface.Settings('Reset_Settings');">Сбросить</div>
+		</div>
+		 
+	   <h2 id="account_deleting">Удаление аккаунта <div>Требуется подтверждение по E-mail / телефону</div></h2>
+	    <div id="account_deleting_content">
+		  <p>Полное удаление аккаунта в сервисе.</p>
+		 <div id="account_deleting_button" class="submit_button" onClick="Interface.Settings('Delete_Account');">Удалить</div>
+		</div>
+		
+     </div>
+    </div>
+   </div>
+
+  
+   <!--  СЕДЬМАЯ ВКЛАДКА "СИНХРОНИЗАЦИЯ"	-->
+
+    <div id="Item-Content-7" class="content wrapper">
+	 <div class="scroller"><div class="container">
+	 
+      <h2>Выберите удобный для вас способ хранения закладок</h2>
+        
+	   <div id="SinhInOut">
+		
+	  			   
+	    <p id="textLocal">Выбирайте «Локальный способ хранения», если вы пользуетесь разными браузерами и в каждом из них 
+	       вам нужны разные закладки  с гарантией сохранности</p>
+ 
+       <div id="local" class="radio" onClick="Interface.SetStorageMethod('local')" >
+          <input type="radio" name="SinhSet" id="SinhLocal" value="local"   /> 
+            <label for="SinhLocal">Хранить закладки Локально</label></div>
+	        <div id="ps_local" style="height: 0px;"><table class="backup_list"><tr><td>№</td><td>Браузер</td><td>Дата</td><td>Сайтов</td><td>Статус</td><td>Операции</td></tr><tr  data-id="1439398461"><td>1</td><td style="text-align:left;" title="Идентификатор: 1439398461. UserAgent: AppleWebKit/537.36  Chrome/79.0.3945.130 Safari/537.36">Chrome 79.0</td><td title="Дата последнего изменения">23.03.2019  23:11</td><td>320</td><td><span class="green">Создан</span></td><td><div class="delete" title="Удалить Бэкап" onclick="Bd.DeleteBackUp('1439398461')"></div>  <div class="download" title="Скачать Бэкап с сервера" onclick="Bd.DownloadSelectedBackUp('1439398461')"></div></td></tr><tr class="active" data-id="1742907960"><td>2</td><td style="text-align:left;" title="Идентификатор: 1742907960. UserAgent: Gecko/20100101 Firefox/130.0">Firefox 130.0</td><td title="Дата последнего изменения">06.04.2025  08:28</td><td>363</td><td><span class="green">Создан</span></td><td> <div class="upload" title="Создать Бэкап на сервере" onclick="Bd.UploadMyBackUp()"></div> <div class="download" title="Скачать Бэкап с сервера" onclick="Bd.DownloadSelectedBackUp('1742907960')"></div></td></tr><tr><td>3</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>4</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>5</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr></table><div id="backup_text"><p><span>Бэкап для этого браузера: </span>загружен 06.04.2025 в 08:28 <span class="refresh" title="Обновить данные" onclick="Bd.RefreshBackUpStatus()"></span></p></div></div> 
+			
+	    <p id="textOnline">Выбирайте «Онлайн способ хранения», если вы пользуетесь разными браузерами, но в каждом из них вам нужны одни и те же закладки, 
+	       которые синхронизируются со всеми подключенными устройствами.</p>
+   
+       <div id="online" class="radio" onClick="Interface.SetStorageMethod('online')" >
+	     <input type="radio" name="SinhSet" id="SinhOnline" value="online" checked="checked"  /> 
+           <label for="SinhOnline">Хранить закладки Онлайн</label></div>
+           <div id="ps_online" style="height: 0px;"></div>
+	
+      </div>
+	
+	<h2>Импорт закладок из HTML-файла</h2>
+	
+	  <p>Для загрузки (импорта) закладок выберите на компьютере html-файл, ранее сформированный вашим браузером либо нашим сервисом, и нажмите кнопку Загрузить. </p>
+	  
+	  <div id="ImportBlock" class="upload_block">
+	  
+	    <div class="actions">
+                    <div class="info-count">Информация о загрузке</div>
+                    <div class="info-size"></div>
+					<div class="info-progress">
+					  <div class="progress"></div>
+					 </div>
+                    <button class="upload-file">Загрузить</button>
+                </div><div class="change"><div class="load_from_pc radio">
+                      <input id="ImportBlock_upload_from_pc" class="upload_from_pc" type="radio" value="pc" name="ImportBlock_upload_from" checked="checked">
+					    <label for="ImportBlock_upload_from_pc">Загрузить с компьютера</label>
+					  <div class="form_from_pc" style="display:block;">
+					    <span>Файл не выбран</span>
+					     <input type="file" name="file" class="file-field" />
+					    <div class="text">Обзор</div>
+					  </div>
+				    </div></div>	
+				
+			<div class="log-msg"></div> 
+		  <div class="clear"></div>		    				    
+	   </div>
+		   
+	<h2>Экспорт закладок в HTML-файл</h2>
+	
+	 <p>В результате выгрузки (экспорта) закладок вы получите html-файл, пригодный для дальнейшего Импорта в браузер или обратно на наш сервис. </p>
+	 
+	   <div id="ExportBkmkType" class="ExportBkmkType radio">
+	     <div>
+          <input type="radio" name="ExportBkmkType" id="ExportVisualBkmkType" value="visual_" checked="checked" /> 
+            <label for="ExportVisualBkmkType">Экспорт Визуальных закладок</label></div>
+		 <div>	
+		  <input type="radio" name="ExportBkmkType" id="ExportPanelBkmkType" value="panel_" /> 
+            <label for="ExportPanelBkmkType">Экспорт Панели закладок</label></div>	
+	  </div>
+	 
+	   <div class="submit_button" style="display:block; width:50%; margin: 15px auto;" onClick="Bd.GetExportFile(this);">Получить файл Экспорта</div>
+	
+     </div></div>
+	</div>
+
+     <div id="saved_settings">Сохранено!</div> 
+   
+   <link rel="stylesheet" type="text/css" href="/style/popUp/popup.box.style.css" id="popup-box-style" />
+   <link rel="stylesheet" type="text/css" href="/style/popUp/settings.style.css" id="settings-style" />
+   
+ </article>

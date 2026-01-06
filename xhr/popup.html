@@ -1,0 +1,385 @@
+
+ <div id="popup_box"></div>
+ 
+  <div id="popupbox">
+    <div id="facebox">
+     <div class="body"><div class="msg_content"></div></div>
+	  <div style="clear:both;"></div><div id="close"></div>	   
+   </div>
+  </div>
+  
+  <script id="panelBookmark-form" type="text/js">
+	
+	<li id="panel_popup_c">
+	    <form action="/ajax.php" id="panel_bkmk_f">
+                 <table border="0" width="100%" align="center">
+                    <tr><td colspan="2"><input type="text" name="url" placeholder="Адрес сайта" value=""></td></tr>
+                     <tr><td colspan="2"><input type="text" name="title" placeholder="Название" value=""></td></tr>
+					  <tr><td colspan="2"><input type="text" name="description" placeholder="Описание (не обязательно)" value=""></td></tr>
+	                <tr><td align="center"><input type="button" id="submit" value="Сохранить" onClick="return false;" /></td>
+					    <td align="center"><input type="button" id="cansel" value="Отмена" onClick="Interface.DestroyPanelForm(); return false;" /></td></tr>
+                </table> 
+             </form>
+	 </li>
+			
+  </script>
+  
+  <script id="bookmark-add-form" type="text/js">
+	
+	<div id="add_popup_c"><fieldset><legend>Добавление Сайта </legend><form action="/ajax.php" id="add_bkmk_f">
+                 <table border="0" width="100%" align="center">
+                    <tr><td><input type="text" name="url" placeholder="Адрес сайта" value="" oninput="Interface.CheckAddedElement(this)"></td></tr>
+                     <tr><td><input type="text" name="title" placeholder="Название сайта (не обязательно)" value="" oninput="Interface.CheckAddedElement(this)">
+		              <input type="hidden" name="position" value=""/><input type="hidden" name="parent" value="0"/></td></tr>
+					  <tr id="folder_title"><td align="left" style="padding: 5px 0 13px 13px;"><strong>Добавление Папки</strong/></td></tr>
+					  <tr id="folder_name"><td><input type="text" name="folder_name" placeholder="Название папки" value="" oninput="Interface.CheckAddedElement(this)"></td></tr>
+	                <tr><td align="center"><input type="button" id="submit" value="Добавить" onClick="Interface.AddBkmk();" /></td></tr>
+                </table> 
+             </form></fieldset></div>
+			
+  </script>
+  
+  <script id="bookmark-confirm-access-form" type="text/js">
+	
+	<div id="confirm_access_popup_c">
+	    <fieldset><legend>Подтверждение Доступа</legend>
+		   <form action="/ajax.php" id="confirm_access_bkmk_f">
+                 <table border="0" width="100%" align="center">
+                    <tr><td>
+					 <input type="password" name="password" placeholder="Введите Пароль" value="" >
+					</td></tr>
+	                <tr><td align="center">
+					  <input type="button" id="submit" value="Отправить" />
+					</td></tr>
+                </table> 
+             </form></fieldset>
+	   </div>
+			
+  </script>
+  
+  <script id="bookmark-edit-form" type="text/js">
+	
+   <article>
+	<div id="menu">
+              <h1>Редактирование</h1>
+                 <ul>
+                   <li>Основные данные</li>
+                   <li>Настройки миниатюры</li>
+				   <li class="otstup">Удаление закладки</li>
+                   <li>Вернуться</li>
+                 </ul>
+            </div>
+				
+	   <div class="content wrapper">
+        <div class="scroller"><div class="container">
+	       <div id="edit_popup_c"><form id="edit_popup_f">
+	        <h2>Базовое изменение закладки</h2>
+              <table border="0" width="100%" align="center">
+                <tr><td style="width: 30%; vertical-align: top;" rowspan="4">
+				   <div id="visualImgPreview" class="disableMouseEvents"></div></td>
+				 </tr><tr>
+				   <td><input type="text" name="url" placeholder="Адрес сайта" value="" ></td>
+				 </tr><tr>
+                   <td><input type="text" name="title" placeholder="Название сайта" value="">
+                   <input id="personal" name="personal" type="hidden" value="" />
+				   <input id="personal_patch" name="personal_patch" type="hidden" value="" />
+				   <input id="originalImageID" name="originalImageID" type="hidden" value="1" />
+				   <input id="areaCoordinate" name="areaCoordinate" type="hidden" value="1:1:175:130" /></td>
+				 </tr><tr>
+				   <td class="bkmkCreationMethodUpdate">
+				   <div id="bkmkCreationMethodResetDiv" class="radio" >
+                       <input type="radio" name="bkmkCreationMethodDefault" id="bkmkCreationMethodResetInput" value="off" checked="cheked" /> 
+                         <label for="bkmkCreationMethodResetInput">Не обновлять Миниатюру</label>
+		            </div>
+				    <div id="bkmkCreationMethodThumbDiv" class="radio" >
+	                  <input type="radio" name="bkmkCreationMethodDefault" id="bkmkCreationMethodThumbInput" value="thumb" /> 
+                        <label for="bkmkCreationMethodThumbInput">Установить/Обновить Превью</label>
+		            </div>
+                    <div id="bkmkCreationMethodScreenDiv" class="radio" >
+                       <input type="radio" name="bkmkCreationMethodDefault" id="bkmkCreationMethodScreenInput" value="screen" /> 
+                         <label for="bkmkCreationMethodScreenInput">Установить/Обновить Скриншот</label>
+		            </div>
+                    <input name="bkmkCreationMethod" id="bkmkCreationMethod" type="hidden" value="off"> 
+					     </td></tr>
+                        <tr><td align="center" colspan="3">
+						  <input type="button" id="submit" value="Сохранить" onClick="Interface.EditBkmk();" />
+						</td>
+				   </tr></table>
+			   </form></div>
+			 </div></div>
+          </div>
+	
+	
+	  <div class="content wrapper fsize_middle">
+       <div class="scroller" id="IndividualImageBlock"><div class="container">
+         <h2>Установка персональной миниатюры</h2>
+		 <div class="clear"></div>
+		 <div id="visualImgPersonal" class="disableMouseEvents"></div>
+		 <div id="visualImgPersonalText">
+          <p>Если вам не подходит изображение, установленное по умолчанию, вы сможете добавить своё.</p>
+		  <p>После загрузки изображения откорректируйте его размер и расположение с помощью специальных ползунков, которые появятся при наведении мыши на него.</p>
+		 </div>
+		  <h2 class="individualScreenH2">Загрузите индивидуальную миниатюру для Закладки</h2>
+		  
+		<div id="IndividualScreen" class="upload_block">
+				
+				<div class="actions">
+                    <div class="info-count">Информация о загрузке</div>
+                    <div class="info-size"></div>
+					<div class="info-progress">
+					  <div class="progress"></div>
+					 </div>
+                    <button class="upload-file">Загрузить</button>
+                </div>
+				 
+		 	<div class="change">
+	               <div class="load_from_search radio" style="display:none;">
+                     <input id="IndividualScreen_upload_from_search" class="upload_from_search" type="radio" value="search" name="IndividualScreen_upload_from" checked="checked">
+			          <label for="IndividualScreen_upload_from_search">Загрузить из Поиска</label>
+					  <div class="form_from_search"></div>
+	                </div>
+			
+			
+				  <div class="load_from_pc radio">
+                     <input id="IndividualScreen_upload_from_pc" class="upload_from_pc" type="radio" value="pc" name="IndividualScreen_upload_from">
+					    <label for="IndividualScreen_upload_from_pc">Загрузить с компьютера</label>
+						<div class="form_from_pc"><span>Файл не выбран</span>
+						  <input type="file" name="file" class="file-field"  />
+						  <div class="text">Обзор</div>
+						</div>
+				   </div>
+				 	
+					<div class="load_from_url radio">
+                      <input id="IndividualScreen_upload_from_url" class="upload_from_url" type="radio" value="url" name="IndividualScreen_upload_from">
+					    <label for="IndividualScreen_upload_from_url">Загрузить по ссылке</label>
+						<div class="form_from_url">
+						  <input type="text" name="url-field" class="url-field" placeholder="Ссылка на изображение" />
+						</div>
+		           </div>	
+			 </div>
+				
+				<div class="log-msg" style="padding:10px 0;"></div>
+			 <div class="clear"></div>	
+			
+		  </div>
+				 
+	        <div class="clear" style="text-align:center;">
+			  <input type="button" style="display:none; margin-bottom:10px;" id="submit_personal" value="Сохранить" onClick="Interface.EditBkmk();" />
+			 </div>
+			   
+        </div></div>
+    </div>
+
+
+    <div class="content wrapper">
+     <div class="scroller"><div class="container">
+      <div id="del_popup_c">
+       <h2>Подтвердите Удаление закладки</h2>
+         <table border="0" width="100%" align="center">
+          <tr><td><input type="hidden" name="delbkmk" value=""/></td></tr>
+          <tr><td align="center"><input type="button" id="submit" value="Удалить" onClick="Interface.DelBkmk();" /></td></tr>
+         </table> 
+      </div>
+     </div></div>
+    </div>
+	
+      <link rel="stylesheet" type="text/css" href="/bk_core/css/{skript_version}/popup.box.style.css" id="popup-box-style" />
+ 
+    </article>
+			
+  </script>
+  
+  
+  <script id="bookmark-edit-folder-form" type="text/js">
+	
+  <article>
+	<div id="menu">
+              <h1>Редактирование</h1>
+                 <ul>
+                   <li>Основные данные</li>
+                   <li class="otstup">Очистка папки</li>
+                   <li>Вернуться</li>
+                 </ul>
+            </div>
+			
+	  <div class="content wrapper fsize_middle">
+       <div class="scroller"><div class="container">
+	       <div id="edit_folder_popup_c"><form id="edit_folder_popup_f">
+	        <h2>Редактировать название и доступ к папке</h2>
+              <table border="0" width="100%" align="center">
+                <tr><td width="45%" rowspan="5">
+				  <div id="main_folder" class="bkmk_folder"><div class="front"></div><div class="back"></div></div>
+				 </td></tr>
+				 <tr><td align="center">
+					   <input type="text" name="title" placeholder="Название папки" value="">
+					  </td></tr>
+				<tr><td align="left">
+				       <h2 id="close_access_to_folder">Ограничить доступ Паролем <div>Доступно после авторизации</div></h2>
+					   <h2 id="open_access_to_folder">Открыть доступ <div>Доступно после авторизации</div></h2>
+				  </td></tr>
+				 <tr><td align="center">
+				       <input type="password" id="folder_password" name="password" disabled="disabled" placeholder="Пароль доступа">
+				  </td></tr>
+                 <tr><td align="center">
+				        <input type="password" id="repeat_folder_password" name="repeat_password" disabled="disabled" placeholder="Повторите пароль">
+						<input type="hidden" name="check_password" value="add" />
+						<input type="hidden" name="hash_password" value="" />
+                        <input type="hidden" name="folder_color" value="" /></td>
+					</tr>
+                   
+				 <tr><td colspan="2"><h2>Персонализация папки</h2></td></tr>
+				 <tr><td colspan="2">
+				 
+				  <div id="body_clr_picker" style="margin-top: 5px;">
+                    <div id="folderColorSelector">
+	                   <p class="warning">Ошибка загрузки модуля!</p>
+	                </div>
+     
+	               <ul id="folder_list_of_colors" class="folder_list">
+				    <li data-class="red"><div class="bkmk_folder red"><div class="front"></div><div class="back"></div></div></li>
+				    <li data-class="yellow"><div class="bkmk_folder yellow"><div class="front"></div><div class="back"></div></div></li>
+					<li data-class="green"><div class="bkmk_folder green"><div class="front"></div><div class="back"></div></div></li>
+					<li data-class="blue"><div class="bkmk_folder blue"><div class="front"></div><div class="back"></div></div></li>
+					<li data-class="violet"><div class="bkmk_folder violet"><div class="front"></div><div class="back"></div></div></li>
+					<li data-class="gray"><div class="bkmk_folder gray"><div class="front"></div><div class="back"></div></div></li>
+				  </ul>
+                 </div>
+				 
+				 </td></tr>
+				 
+                 <tr><td align="center" colspan="2"><input type="button" id="submit" value="Сохранить" onClick="Interface.EditFolder();" /></td>
+				 </tr></table>
+			 </form></div></div>
+		   </div></div>
+
+
+    <div class="content wrapper fsize_middle">
+      <div class="scroller"><div class="container">
+         <div id="del_folder_popup_c">
+       <h2>Удаление закладок из папки</h2>
+         <table border="0" width="100%" align="center">
+          <tr><td style="height: 40px; vertical-align: top;"><p>Подтвердите удаление всех закладок из этой папки</p></td></tr>
+		  <tr><td style="padding-bottom:5%; padding-left:3%;" class="checkbox">
+              <input name="delete_folder" id="delete_folder" type="checkbox" value="0"> 
+                 <label for="delete_folder">Удалить вместе с папкой</label></td></tr>
+          <tr><td align="center"><input type="button" id="submit" value="Удалить" onClick="Interface.DelFolder();" /></td></tr>
+         </table> 		 
+     </div></div>
+    </div></div>
+	
+	     <link rel="stylesheet" type="text/css" href="/bk_core/css/{skript_version}/popup.box.style.css" id="popup-box-style" />
+ 
+    </article>
+			
+  </script>
+  
+  
+  <nav id="context-menu" class="context-menu">
+  
+    <ul id="menu_title" class="context-menu__title">
+      <li class="context-menu__item visual_"><span><strong>Визуальные Закладки</strong></span></li>
+	  <li class="context-menu__item panel_"><span><strong>Панель Закладок</strong></span></li>
+	  <li class="context-menu__item resolution_"><span><strong>Опции Экранов</strong></span></li>
+    </ul>
+  
+    <ul id="visual_empty" class="context-menu__items">
+      <li class="context-menu__item"><a href="#" data-action="AddLink">Добавить Сайт</a></li>
+      <li class="context-menu__item"><a href="#" data-action="AddFolder">Добавить Папку</a></li>
+	  <li class="context-menu__delimiter">&nbsp;</li>
+	  <li class="context-menu__item"><a href="#" data-action="PasteElement" disabled="disabled">Вставить</a></li>
+    </ul>
+	
+	<ul id="visual_website" class="context-menu__items">
+	  <li class="context-menu__item"><a href="#" data-action="ViewLinkInThisTab">Открыть ссылку в Текущей вкладке</a></li>
+      <li class="context-menu__item"><a href="#" data-action="ViewLinkInNewTab">Открыть ссылку в Новой вкладке</a></li>
+      <li class="context-menu__item"><a href="#" data-action="ViewLinkInNewWindow">Открыть ссылку в Новом окне</a></li>
+	  <li class="context-menu__item"><a href="#" data-action="ViewLinkInPrivateWindow">Открыть ссылку в Приватном окне</a></li>
+	  <li class="context-menu__item"><a href="#" data-action="CopyLink">Копировать ссылку</a></li>
+	  <li class="context-menu__delimiter">&nbsp;</li>
+	  <li class="context-menu__item"><a href="#" data-action="CutElement">Вырезать</a></li>
+	  <li class="context-menu__delimiter">&nbsp;</li>
+	  <li class="context-menu__item"><a href="#" data-action="EditLink">Редактировать закладку</a></li>
+	  <li class="context-menu__item"><a href="#" data-action="DeleteLink">Удалить закладку</a></li>
+	  <li class="context-menu__delimiter">&nbsp;</li>
+	  <li class="context-menu__item"><a href="#" data-action="ReturnBrowserMenu">Перейти на Меню браузера</a></li>
+	  <li class="context-menu__item"><a href="#" data-action="ReturnServiceMenu">Перейти на Меню сервиса</a></li>
+    </ul>
+	
+	<ul id="visual_folder" class="context-menu__items">
+      <li class="context-menu__item"><a href="#" data-action="ViewFolder">Открыть папку</a></li>
+	  <li class="context-menu__item"><a href="#" data-action="FolderExport">Экспорт папки</a></li>
+	  <li class="context-menu__delimiter">&nbsp;</li>
+	  <li class="context-menu__item"><a href="#" data-action="CutElement">Вырезать</a></li>
+	  <li class="context-menu__delimiter">&nbsp;</li>
+	  <li class="context-menu__item"><a href="#" data-action="EditFolder">Редактировать папку</a></li>
+	  <li class="context-menu__item"><a href="#" data-action="DeleteFolder">Удалить папку</a></li>
+    </ul>
+	
+	<ul id="panel_empty" class="context-menu__items">
+      <li class="context-menu__item"><a href="#" data-action="AddLink">Добавить Сайт</a></li>
+      <li class="context-menu__item"><a href="#" data-action="AddFolder">Добавить Папку</a></li>
+	  <li class="context-menu__item"><a href="#" data-action="AddDelimiter">Добавить Разделитель</a></li>
+	  <li class="context-menu__delimiter">&nbsp;</li>
+	  <li class="context-menu__item"><a href="#" data-action="PasteElement" disabled="disabled">Вставить</a></li>
+    </ul>
+	
+	<ul id="panel_delimiter" class="context-menu__items">
+      <li class="context-menu__item"><a href="#" data-action="AddLink">Добавить Сайт</a></li>
+      <li class="context-menu__item"><a href="#" data-action="AddFolder">Добавить Папку</a></li>
+	  <li class="context-menu__item"><a href="#" data-action="AddDelimiter">Добавить Разделитель</a></li>
+	  <li class="context-menu__delimiter">&nbsp;</li>
+	  <li class="context-menu__item"><a href="#" data-action="CutElement">Вырезать</a></li>
+	  <li class="context-menu__item"><a href="#" data-action="PasteElement" disabled="disabled">Вставить</a></li>
+	  <li class="context-menu__delimiter">&nbsp;</li>
+	  <li class="context-menu__item"><a href="#" data-action="DeleteDelimiter">Удалить</a></li>
+    </ul>
+	
+	<ul id="panel_website" class="context-menu__items">
+	  <li class="context-menu__item"><a href="#" data-action="ViewLinkInThisTab">Открыть ссылку в Текущей вкладке</a></li>
+      <li class="context-menu__item"><a href="#" data-action="ViewLinkInNewTab">Открыть ссылку в Новой вкладке</a></li>
+      <li class="context-menu__item"><a href="#" data-action="ViewLinkInNewWindow"> Открыть ссылку в Новом окне</a></li>
+	  <li class="context-menu__item"><a href="#" data-action="ViewLinkInPrivateWindow">Открыть ссылку в Приватном окне</a></li>
+	  <li class="context-menu__item"><a href="#" data-action="CopyLink">Копировать ссылку</a></li>
+	  <li class="context-menu__delimiter">&nbsp;</li>
+	  <li class="context-menu__item"><a href="#" data-action="AddLink">Добавить Сайт</a></li>
+      <li class="context-menu__item"><a href="#" data-action="AddFolder">Добавить Папку</a></li>
+	  <li class="context-menu__item"><a href="#" data-action="AddDelimiter">Добавить Разделитель</a></li>
+	  <li class="context-menu__delimiter">&nbsp;</li>
+	  <li class="context-menu__item"><a href="#" data-action="CutElement">Вырезать</a></li>
+	  <li class="context-menu__item"><a href="#" data-action="PasteElement" disabled="disabled">Вставить</a></li>
+	  <li class="context-menu__delimiter">&nbsp;</li>
+	  <li class="context-menu__item"><a href="#" data-action="EditLink">Редактировать</a></li>
+	  <li class="context-menu__item"><a href="#" data-action="DeleteLink">Удалить</a></li>
+	  <li class="context-menu__delimiter">&nbsp;</li>
+	  <li class="context-menu__item"><a href="#" data-action="ReturnBrowserMenu">Перейти на Меню браузера</a></li>
+	  <li class="context-menu__item"><a href="#" data-action="ReturnServiceMenu">Перейти на Меню сервиса</a></li>
+    </ul>
+	
+	<ul id="panel_folder" class="context-menu__items">
+      <li class="context-menu__item"><a href="#" data-action="AddLink">Добавить Сайт</a></li>
+      <li class="context-menu__item"><a href="#" data-action="AddFolder">Добавить Папку</a></li>
+	  <li class="context-menu__item"><a href="#" data-action="AddDelimiter">Добавить Разделитель</a></li>
+	  <li class="context-menu__item"><a href="#" data-action="FolderExport">Экспорт папки</a></li>
+	  <li class="context-menu__delimiter">&nbsp;</li>
+	  <li class="context-menu__item"><a href="#" data-action="CutElement">Вырезать</a></li>
+	  <li class="context-menu__item"><a href="#" data-action="PasteElement" disabled="disabled">Вставить</a></li>
+	  <li class="context-menu__delimiter">&nbsp;</li>
+	  <li class="context-menu__item folderColor">
+	     <span class="itemName">Сменить цвет</span>
+	     <a href="#" data-action="ChangeFolderColor" data-value="red">Красный</a>
+		 <a href="#" data-action="ChangeFolderColor" data-value="yellow">Жёлтый</a>
+		 <a href="#" data-action="ChangeFolderColor" data-value="green">Зелёный</a>
+		 <a href="#" data-action="ChangeFolderColor" data-value="blue">Синий</a>
+		 <a href="#" data-action="ChangeFolderColor" data-value="violet">Фиолетовый</a>
+		 <a href="#" data-action="ChangeFolderColor" data-value="gray">Серый</a>
+	  </li>
+	  <li class="context-menu__item"><a href="#" data-action="EditFolder">Редактировать</a></li>
+	  <li class="context-menu__item"><a href="#" data-action="DeleteFolder">Удалить</a></li>
+    </ul>
+	
+	<ul id="resolution_item" class="context-menu__items">
+	  <li class="context-menu__item"><a href="#" data-action="SetDefaultResolution">Назначить Экраном по умолчанию</a></li>
+	  <li class="context-menu__item"><a href="#" data-action="SetNameForResolution">Изменить Название</a></li>
+	  <li class="context-menu__item"><a href="#" data-action="DeleteResolution">Удалить</a></li>
+    </ul>
+  </nav>
